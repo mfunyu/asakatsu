@@ -1,7 +1,9 @@
 *
 */*
-!*/*.js
+!commands/
+!*.js
 !*.md
 !*.json
 !.gitignore
+!.prettierrc
 !*/Makefile
