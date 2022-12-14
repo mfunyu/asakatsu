@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
+const embed = require('../helpers/embed');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,11 +18,10 @@ module.exports = {
       await interaction.reply(`User \`${username}\` is successfully deleted.`);
     } catch (error) {
       console.error(error.message);
-      let content = error.message;
-      if (error.response) content += `\ndetail: ${error.response.data.message}`;
+      const errorEmbed = embed.errorMessage(error);
 
       await interaction.reply({
-        content,
+        embeds: [errorEmbed],
         ephemeral: true,
       });
     }

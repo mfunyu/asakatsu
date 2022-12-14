@@ -19,12 +19,10 @@ module.exports = {
       await interaction.reply(response);
     } catch (error) {
       console.error(error.message);
-
-      let content = error.message;
-      if (error.response) content += `\ndetail: ${error.response.data.message}`;
+      const errorEmbed = embed.errorMessage(error);
 
       await interaction.reply({
-        content,
+        embeds: [errorEmbed],
         ephemeral: true,
       });
     }

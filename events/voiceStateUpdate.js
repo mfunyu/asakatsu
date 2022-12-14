@@ -39,10 +39,9 @@ module.exports = {
       await channel.send(response);
     } catch (error) {
       console.error(error.message);
-      let content = error.message;
-      if (error.response) content += `\ndetail: ${error.response.data.message}`;
+      const errorEmbed = embed.errorMessage(error);
 
-      await channel.send({ content });
+      await channel.send({ embeds: [errorEmbed] });
     }
   },
 };

@@ -33,3 +33,21 @@ exports.showStat = async function (member) {
   );
   return { embeds: [graphEmbed], files: [file] };
 };
+
+exports.errorMessage = function (error) {
+  let value = '\u200B';
+  console.log(error.message);
+
+  if (error.response) value = `detail: ${error.response.data.message}`;
+  console.log(value);
+
+  const errorEmbed = new EmbedBuilder()
+    .setTitle('Error')
+    .setColor('0xd8544f')
+    .setFields({
+      name: error.message,
+      value,
+    });
+
+  return errorEmbed;
+};
