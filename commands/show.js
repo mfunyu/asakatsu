@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
-const axios = require('axios');
-const { convert } = require('convert-svg-to-png');
+
+const pixela = require('../helpers/pixela');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,17 +8,10 @@ module.exports = {
     .setDescription('Display your graph'),
   async execute(interaction) {
     try {
-      const member = interaction.member;
-      const username = 'g' + (member.guild.id + 'x' + member.id).substr(-31);
-      const graphId = 'g' + `${member.guild.id}-asakatsu`.substr(-15);
+      const username = pixela.getUsername(interaction.member);
+      const graphId = pixela.getGraphId(interaction.member);
 
-      const svg = await axios.get(
-        `https://pixe.la/v1/users/${username}/graphs/${graphId}?mode=short&appearance=dark`,
-      );
-      const png = await convert(svg.data, {
-        height: 1000,
-        width: 5000,
-      });
+      const png = await pixela.getGraphPNG(username, graphId);
 
       await interaction.reply({ files: [png] });
     } catch (error) {
