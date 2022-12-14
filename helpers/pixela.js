@@ -50,9 +50,28 @@ exports.getGraphId = function (member) {
 exports.getPixelByDate = function (member, yyyyMMdd) {
   const username = module.exports.getUsername(member);
   const graphId = module.exports.getGraphId(member);
-
+  //   console.log(username, graphId, yyyyMMdd);
   return axios.get(
-    `https://pixe.la/v1/users/${username}/graphs/${graphId}/${yyyyMMdd}`,
+    `https://pixe.la/v1/users/${username}/graphs/${graphId}/${yyyyMMdd}/retina`,
+    {
+      headers: { 'X-USER-TOKEN': process.env.TOKEN },
+    },
+  );
+};
+
+exports.postPixelByGuantityAndDate = function (member, quantity, yyyyMMdd) {
+  const username = module.exports.getUsername(member);
+  const graphId = module.exports.getGraphId(member);
+  console.log(username, graphId);
+
+  const body = {
+    date: yyyyMMdd,
+    quantity,
+  };
+
+  return axios.post(
+    `https://pixe.la/v1/users/${username}/graphs/${graphId}`,
+    body,
     {
       headers: { 'X-USER-TOKEN': process.env.TOKEN },
     },
