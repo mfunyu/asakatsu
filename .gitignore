@@ -2,6 +2,7 @@
 */*
 !commands/
 !helpers/
+!events/
 !*.js
 !*.md
 !*.json
