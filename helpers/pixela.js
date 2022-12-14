@@ -11,8 +11,7 @@ exports.createAccount = function (username) {
   return axios.post('https://pixe.la/v1/users', body);
 };
 
-exports.createGraph = function (guildId, username) {
-  const graphId = 'g' + `${guildId}-asakatsu`.substr(-15);
+exports.createGraph = function (username, graphId) {
   const graphBody = {
     id: graphId,
     name: 'asakatsu',
@@ -34,8 +33,8 @@ exports.getGraphPNG = function (username, graphId) {
     )
     .then((svg) =>
       convert(svg.data, {
-        height: 1000,
-        width: 5000,
+        height: 180,
+        width: 250,
       }),
     );
 };

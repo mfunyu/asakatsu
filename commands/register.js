@@ -12,12 +12,11 @@ module.exports = {
 
     try {
       await pixela.createAccount(username);
-      await pixela.createGraph(graphId, username);
+      await pixela.createGraph(username, graphId);
 
-      const pngBuffer = await pixela.getGraphPNG(username, graphId);
-      const { graphEmbed, file } = embed.embedGraph(pngBuffer);
+      const response = await embed.showStat(interaction.member);
 
-      await interaction.reply({ embeds: [graphEmbed], files: [file] });
+      await interaction.reply(response);
     } catch (error) {
       console.error(error.message);
 
