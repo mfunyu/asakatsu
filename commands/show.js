@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 const pixela = require('../helpers/pixela');
+const embed = require('../helpers/embed');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,9 +12,10 @@ module.exports = {
       const username = pixela.getUsername(interaction.member);
       const graphId = pixela.getGraphId(interaction.member);
 
-      const png = await pixela.getGraphPNG(username, graphId);
+      const pngBuffer = await pixela.getGraphPNG(username, graphId);
+      const { graphEmbed, file } = embed.embedGraph(pngBuffer);
 
-      await interaction.reply({ files: [png] });
+      await interaction.reply({ embeds: [graphEmbed], files: [file] });
     } catch (error) {
       console.error(error.message);
       let content = error.message;
