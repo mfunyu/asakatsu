@@ -46,3 +46,15 @@ exports.getUsername = function (member) {
 exports.getGraphId = function (member) {
   return 'g' + `${member.guild.id}-asakatsu`.substr(-15);
 };
+
+exports.getPixelByDate = function (member, yyyyMMdd) {
+  const username = module.exports.getUsername(member);
+  const graphId = module.exports.getGraphId(member);
+
+  return axios.get(
+    `https://pixe.la/v1/users/${username}/graphs/${graphId}/${yyyyMMdd}`,
+    {
+      headers: { 'X-USER-TOKEN': process.env.TOKEN },
+    },
+  );
+};
