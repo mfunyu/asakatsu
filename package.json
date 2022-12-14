@@ -18,6 +18,7 @@
   "homepage": "https://github.com/mfunyu/asakatsu#readme",
   "dependencies": {
     "axios": "^1.2.1",
+    "convert-svg-to-png": "^0.6.4",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3"
   },

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
@@ -16,10 +16,12 @@ module.exports = {
     };
 
     try {
+      // Create user account
       await axios.post('https://pixe.la/v1/users', body);
-      console.log(member.guild.id);
+
+      const graphId = 'g' + `${member.guild.id}-asakatsu`.substr(-15);
       const graphBody = {
-        id: 'g' + `${member.guild.id}-asakatsu`.substr(-15),
+        id: graphId,
         name: 'asakatsu',
         unit: 'h',
         type: 'int',
@@ -35,13 +37,19 @@ module.exports = {
         },
       );
 
-      await interaction.reply(`User \`${username}\` is successfully created.`);
+      const graphEmbed = new EmbedBuilder()
+        .setTitle('Graph')
+        .setImage(`https://pixe.la/v1/users/${username}/graphs/${graphId}`);
+
+      await interaction.reply({ embeds: [graphEmbed] });
     } catch (error) {
       console.error(error.message);
       console.error(body);
+      let content = error.message;
+      if (error.response) content += `\ndetail: ${error.response.data.message}`;
 
       await interaction.reply({
-        content: error.message + `\ndetail: ${error.response.data.message}`,
+        content,
         ephemeral: true,
       });
     }
