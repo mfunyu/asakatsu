@@ -1,0 +1,28 @@
+{
+  "name": "asakatsu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfunyu/asakatsu.git"
+  },
+  "author": "mfunyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mfunyu/asakatsu/issues"
+  },
+  "homepage": "https://github.com/mfunyu/asakatsu#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.8.1"
+  }
+}

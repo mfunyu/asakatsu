@@ -1,0 +1,7 @@
+*
+*/*
+!*/*.js
+!*.md
+!*.json
+!.gitignore
+!*/Makefile
